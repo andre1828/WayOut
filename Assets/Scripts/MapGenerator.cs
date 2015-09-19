@@ -67,10 +67,6 @@ public class MapGenerator : MonoBehaviour {
                     {
                         blackCube = (GameObject) Instantiate (blackCube, new Vector3(pos.x, pos.y + .5f, pos.z), Quaternion.identity);
                     }
-					if(x == 0 && y == 0)
-                    {
-                        Instantiate(Player,new Vector3 (pos.x, .5f,pos.z),Quaternion.identity);
-                    }
                     if (x == width - 1 && y == height - 1)
                     {
                         WinPlatform = (GameObject) Instantiate (WinPlatform, new Vector3(pos.x, pos.y, pos.z),Quaternion.identity);

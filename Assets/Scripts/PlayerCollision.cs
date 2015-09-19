@@ -15,6 +15,7 @@ public class PlayerCollision : MonoBehaviour
         Destroy (gameObject);
         try
         {
+            gameController.SetIsRespawnToTrue();
             gameController.SpawnPlayer();
         }
         catch (System.Exception)
