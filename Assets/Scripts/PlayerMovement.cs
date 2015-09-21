@@ -6,9 +6,17 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] float speed;
     public bool  CanMove;
     public bool IsRespawn;
+    [SerializeField] private MapGenerator mapgenerator;
+
+    [SerializeField] private float XboundaryLeft ;
+    [SerializeField] private float XboundaryRight ;
+    [SerializeField] private float YboundaryDown;
+    [SerializeField] private float YboundaryUp ;
 
     // Use this for initialization
     void Start() {
+        mapgenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
+
         if (!IsRespawn)
         {
             StartCoroutine(FreezeUntilStart());
@@ -21,10 +29,19 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		KeyboardControllPlayer ();
-	}
+        KeyboardControllPlayer();
+       
+        float XboundaryLeft = -((mapgenerator.width - 1) / 2f);
+        float XboundaryRight = ((mapgenerator.width - 1) / 2f);
+        float YboundaryDown = -((mapgenerator.height - 1) / 2f);
+        float YboundaryUp = ((mapgenerator.height - 1) / 2f);
 
-	public void KeyboardControllPlayer()
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, XboundaryLeft, XboundaryRight),
+                                        .5f,
+                                        Mathf.Clamp(transform.position.z, YboundaryDown, YboundaryUp));
+    }
+
+    public void KeyboardControllPlayer()
 	{
         if (CanMove == true)
         {
@@ -45,8 +62,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void JoystickControllPlayer()
 	{
+     
 
-	}
+    }
 
     public IEnumerator FreezeUntilStart()
     {
@@ -54,12 +72,10 @@ public class PlayerMovement : MonoBehaviour {
         CanMove = true;
     }
 
-    public void MoveAfterRespawn()
-    {
-        if (IsRespawn)
-        {
-            CanMove = true;
-            IsRespawn = false;
-        }
-    }
+
+
+ 
 }
+
+
+    

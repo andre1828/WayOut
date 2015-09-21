@@ -69,7 +69,7 @@ public class MapGenerator : MonoBehaviour {
                     }
                     if (x == width - 1 && y == height - 1)
                     {
-                        WinPlatform = (GameObject) Instantiate (WinPlatform, new Vector3(pos.x, pos.y, pos.z),Quaternion.identity);
+                        WinPlatform = (GameObject) Instantiate (WinPlatform, new Vector3(pos.x, pos.y + .5f, pos.z),Quaternion.identity);
                     }
 				}
 			}

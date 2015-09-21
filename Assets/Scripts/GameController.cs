@@ -7,20 +7,20 @@ public class GameController : MonoBehaviour {
     [SerializeField] private GameObject Player;
     [SerializeField] private MapGenerator mapgenerator;
     [SerializeField] private GameObject Scenelight;
+    [SerializeField] private Camera Camera;
     [SerializeField] private AudioClip[] audios;
-
+    
     void Start()
-    {
-        audios = new AudioClip[0];
+    {   
         mapgenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
-        // Scenelight = GameObject.FindGameObjectWithTag("SceneLight");
+        Camera.transform.position = new Vector3(0, (mapgenerator.width * 1.5f), 0);
         SpawnPlayer();
         StartCoroutine(LightsOut());
         SetIsRespawnToFalse();
     }
     void Update () {
-
-	}
+       
+    }
 
     public void SpawnPlayer()
     {
@@ -31,7 +31,8 @@ public class GameController : MonoBehaviour {
     private IEnumerator LightsOut()
     {
         yield return new WaitForSeconds(3.8f);
-        
+        Camera.backgroundColor = Color.black;
+       
     }
 
     public void SetIsRespawnToTrue()
